@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dividir imagen en hojas A4</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="libs/cropper.min.css">
+</head>
+<body>
+    <h1>Dividir imagen en hojas A4</h1>
+    <input type="file" id="imageInput" accept="image/*">
+    <div id="controls">
+        <label for="cols">Columnas (A4):</label>
+        <input type="number" id="cols" min="1" value="2">
+        <label for="rows">Filas (A4):</label>
+        <input type="number" id="rows" min="1" value="2">
+        <button id="generateBtn">Generar PDF</button>
+        <button id="printBtn" disabled>Imprimir PDF</button>
+    </div>
+    <div id="crop-container" style="display:none;">
+        <img id="crop-image" style="max-width:100%; display:block; margin:auto;" />
+        <button id="cropBtn">Usar recorte</button>
+    </div>
+    <div id="preview"></div>
+    <!-- Librerías externas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
