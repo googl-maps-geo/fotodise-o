@@ -52,13 +52,11 @@ imageInput.addEventListener('change', (e) => {
 cropBtn.addEventListener('click', () => {
 	if (cropper) {
 		croppedCanvas = cropper.getCroppedCanvas();
-		loadedImage = new Image();
-		loadedImage.onload = function () {
-			cropContainer.style.display = 'none';
-			previewDiv.style.display = 'block';
-			showPreview(loadedImage);
-		};
-		loadedImage.src = croppedCanvas.toDataURL('image/png');
+		cropContainer.style.display = 'none';
+		previewDiv.style.display = 'block';
+		// Usar el canvas recortado directamente para la lógica
+		loadedImage = croppedCanvas;
+		showPreview(loadedImage);
 		cropper.destroy();
 		cropper = null;
 	}
@@ -149,8 +147,9 @@ function showPreview(img) {
 	}
 	ctx.restore();
 
-	canvas.style.maxWidth = '400px';
-	canvas.style.maxHeight = '400px';
+	// Responsive preview
+	canvas.style.maxWidth = '98vw';
+	canvas.style.maxHeight = '60vh';
 	previewDiv.appendChild(canvas);
 }
 // Actualizar vista previa al cambiar filas/columnas
