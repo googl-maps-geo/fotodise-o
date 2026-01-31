@@ -19,6 +19,23 @@ const cropContainer = document.getElementById('crop-container');
 const cropImage = document.getElementById('crop-image');
 const cropBtn = document.getElementById('cropBtn');
 const printBtn = document.getElementById('printBtn');
+const loader = document.getElementById('loader');
+const loaderText = document.getElementById('loader-text');
+const messageDiv = document.getElementById('message');
+
+function showLoader(text = 'Procesando...') {
+	loaderText.textContent = text;
+	loader.style.display = 'flex';
+}
+function hideLoader() {
+	loader.style.display = 'none';
+}
+function showMessage(msg, success = true) {
+	messageDiv.textContent = msg;
+	messageDiv.style.background = success ? '#1976d2' : '#d32f2f';
+	messageDiv.style.display = 'block';
+	setTimeout(() => { messageDiv.style.display = 'none'; }, 3000);
+}
 
 let loadedImage = null;
 let cropper = null;
@@ -167,16 +184,24 @@ rowsInput.addEventListener('input', () => {
 
 generateBtn.addEventListener('click', async () => {
 	if (!loadedImage) {
-		alert('Primero selecciona una imagen.');
+		showMessage('Primero selecciona una imagen.', false);
 		return;
 	}
 	const cols = parseInt(colsInput.value, 10);
 	const rows = parseInt(rowsInput.value, 10);
 	if (cols < 1 || rows < 1) {
-		alert('Columnas y filas deben ser mayores a 0.');
+		showMessage('Columnas y filas deben ser mayores a 0.', false);
 		return;
 	}
-	await generatePDF(loadedImage, cols, rows);
+	showLoader('Generando PDF...');
+	try {
+		await generatePDF(loadedImage, cols, rows);
+		hideLoader();
+		showMessage('¡PDF generado con éxito!');
+	} catch (e) {
+		hideLoader();
+		showMessage('Error al generar el PDF.', false);
+	}
 });
 
 printBtn.addEventListener('click', () => {

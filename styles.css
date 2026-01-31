@@ -1,3 +1,42 @@
+/* Loader y mensajes */
+#loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255,255,255,0.7);
+    z-index: 1000;
+}
+.spinner {
+    border: 6px solid #eee;
+    border-top: 6px solid #1976d2;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+#message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1976d2;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    z-index: 1100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    min-width: 180px;
+    text-align: center;
+}
 body {
     font-family: Arial, sans-serif;
     margin: 10px;
