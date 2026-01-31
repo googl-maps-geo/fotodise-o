@@ -54,9 +54,13 @@ cropBtn.addEventListener('click', () => {
 		croppedCanvas = cropper.getCroppedCanvas();
 		cropContainer.style.display = 'none';
 		previewDiv.style.display = 'block';
-		// Usar el canvas recortado directamente para la lógica
-		loadedImage = croppedCanvas;
-		showPreview(loadedImage);
+		// Convertir el canvas recortado a un objeto Image
+		const img = new Image();
+		img.onload = function () {
+			loadedImage = img;
+			showPreview(loadedImage);
+		};
+		img.src = croppedCanvas.toDataURL('image/png');
 		cropper.destroy();
 		cropper = null;
 	}
