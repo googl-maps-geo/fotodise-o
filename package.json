@@ -1,0 +1,24 @@
+{
+  "name": "fotodise-o",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "build:css": "npx tailwindcss -i ./src/input.css -o ./dist/output.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/googl-maps-geo/fotodise-o.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/googl-maps-geo/fotodise-o/issues"
+  },
+  "homepage": "https://github.com/googl-maps-geo/fotodise-o#readme",
+  "devDependencies": {
+    "tailwindcss": "^4.1.18"
+  }
+}
