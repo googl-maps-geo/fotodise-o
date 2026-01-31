@@ -70,10 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     startBtn.addEventListener('click', startProcessing);
     downloadBtn.addEventListener('click', downloadPDF);
+    // Igual que en React: Reiniciar solo limpia el proceso, no borra la imagen
     resetBtn.addEventListener('click', () => {
-        image = null;
-        imgElement = null;
-        previewImg.src = "";
         resetState();
         updateUI();
     });
@@ -256,6 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (index >= totalTiles) {
             processedTiles = currentTilesArray;
             status = 'ready';
+            updateLogs("¡Restauración Completa! Generando vista final.");
             updateUI();
             return;
         }
