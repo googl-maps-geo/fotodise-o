@@ -4,7 +4,7 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "build:css": "npx tailwindcss -i ./src/input.css -o ./dist/output.css",
+    "build:css": "npx --yes tailwindcss -i ./src/input.css -o ./dist/output.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

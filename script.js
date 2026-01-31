@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentTileIndex = 0;
     let processedTiles = [];
     let logs = "";
-    let jsPdfLoaded = true; // Asumimos que está cargado desde el HTML
+    let jsPdfLoaded = false; // Se valida tras la carga del DOM
 
     // --- DOM ELEMENTS ---
     const uploadView = document.getElementById('upload-view');
@@ -43,6 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const previewGrid = document.getElementById('preview-grid');
     const canvasProcessing = document.getElementById('canvas-processing');
 
+    // Marcar jsPDF como cargado si está disponible
+    jsPdfLoaded = !!(window.jspdf && window.jspdf.jsPDF);
+
     // --- EVENT LISTENERS ---
     dropZone.addEventListener('click', () => fileInput.click());
     fileInput.addEventListener('change', handleImageUpload);
@@ -70,6 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
     resetBtn.addEventListener('click', () => {
         image = null;
         imgElement = null;
+        previewImg.src = "";
+        resetState();
         updateUI();
     });
 
@@ -171,14 +176,9 @@ document.addEventListener('DOMContentLoaded', () => {
         status = 'idle';
         processedTiles = [];
         currentTileIndex = 0;
-        cols = 3;
-        rows = 2;
-        colsInput.value = 3;
-        rowsInput.value = 2;
-        orientation = 'portrait';
-        updateOrientationButtons();
         updateLogs("");
         updatePreviewGrid();
+        updateOrientationButtons();
     }
 
     // --- DEEP RESTORE FILTERS ---
@@ -335,7 +335,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function downloadPDF() {
-        if (processedTiles.length === 0 || !jsPdfLoaded) return;
+        if (processedTiles.length === 0 || !jsPdfLoaded || !window.jspdf) return;
         
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF({ orientation, unit: 'mm', format: 'a4' });
@@ -351,5 +351,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Initial call
+    updatePreviewGrid();
+    updateOrientationButtons();
     updateUI();
 });
