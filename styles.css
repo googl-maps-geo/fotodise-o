@@ -1,110 +1,32 @@
-/* Loader y mensajes */
-#loader {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(255,255,255,0.7);
-    z-index: 1000;
-}
-.spinner {
-    border: 6px solid #eee;
-    border-top: 6px solid #1976d2;
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
+.animate-spin {
     animation: spin 1s linear infinite;
-    margin-bottom: 10px;
 }
+
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-#message {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #1976d2;
-    color: #fff;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-size: 1.1em;
-    z-index: 1100;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    min-width: 180px;
-    text-align: center;
-}
-body {
-    font-family: Arial, sans-serif;
-    margin: 10px;
-    background: #f9f9f9;
-}
-h1 {
-    color: #333;
-    font-size: 1.5em;
-    text-align: center;
-}
-#controls {
-    margin: 20px 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
-}
-#controls label, #controls input, #controls button {
-    font-size: 1em;
-}
-#controls input[type="number"] {
-    width: 60px;
-}
-#controls button {
-    padding: 8px 14px;
-    border-radius: 5px;
-    border: none;
-    background: #1976d2;
-    color: #fff;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-#controls button:disabled {
-    background: #aaa;
-    cursor: not-allowed;
-}
-#preview {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#crop-container {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-#crop-image {
-    max-width: 100vw;
-    max-height: 60vh;
-    border: 1px solid #ccc;
-    background: #fff;
-}
-@media (max-width: 600px) {
-    h1 {
-        font-size: 1.1em;
+    from {
+        transform: rotate(0deg);
     }
-    #controls {
-        flex-direction: column;
-        gap: 6px;
+    to {
+        transform: rotate(360deg);
     }
-    #preview, #crop-container {
-        margin-top: 10px;
-    }
-    #crop-image {
-        max-width: 98vw;
-        max-height: 40vh;
-    }
+}
+
+/* Estilos para el contenedor del canvas de procesamiento */
+#canvas-processing {
+    max-height: 600px; /* Equivalente a max-h-[600px] */
+    box-shadow: 0 0 50px rgba(249, 115, 22, 0.3); /* shadow-[0_0_50px_rgba(249,115,22,0.3)] */
+}
+
+/* Fondo de malla para el contenedor del canvas */
+.bg-grid {
+    background-image: radial-gradient(#334155 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+/* Para deshabilitar eventos en el panel de configuración durante el procesamiento */
+.pointer-events-none {
+    pointer-events: none;
+}
+.opacity-50 {
+    opacity: 0.5;
 }
